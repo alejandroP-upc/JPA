@@ -6,12 +6,43 @@
 
 package com.example.models;
 
+import com.sun.istack.NotNull;
+import java.io.Serializable;
+import java.util.Calendar;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 /**
  *
  * @author Mauricio
  */
-public class Competitor{
+
+@Entity
+public class Competitor implements Serializable{
+    
+    private static final long serialVersionsUID=1L;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
      
+    @NotNull
+    @Column(name = "created_at",updatable = false)
+    @Temporal(TemporalType.DATE)
+    private Calendar createdAt;
+    
+    @NotNull
+    @Column(name = "updated_at")
+    @Temporal(TemporalType.DATE)
+    private Calendar updatedAt;
+    
     
     private String name;
     
@@ -47,7 +78,14 @@ public class Competitor{
         country=countryN;
         winner=winnerN;
     }
-    
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
    
     public String getName() {
         return name;
@@ -120,5 +158,17 @@ public class Competitor{
     public void setWinner(boolean winner) {
         this.winner = winner;
     }
+    
+    @PreUpdate
+    private void updateTimestamp(){
+        this.updatedAt=Calendar.getInstance();
+    }
+    
+    @PrePersist
+    private void creationTimestamp(){
+        this.createdAt = Calendar.getInstance();
+        this.updatedAt = Calendar.getInstance();
+    }
+    
     
 }
