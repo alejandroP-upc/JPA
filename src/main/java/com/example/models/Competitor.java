@@ -21,14 +21,14 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author Mauricio
+ * @author Mauricio munoz
  */
 
 @Entity
 public class Competitor implements Serializable{
     
     private static final long serialVersionsUID=1L;
-    
+     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
