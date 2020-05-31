@@ -6,6 +6,8 @@
 
 package com.example.models;
 
+import java.util.Set;
+
 /**
  *
  * @author Mauricio
@@ -26,7 +28,11 @@ public class CompetitorDTO {
     
     private String city;
     
-    private String country;
+    private String country; 
+    
+    private Set<Producto> productos;
+    
+    private String password;
     
     
     public CompetitorDTO(){
@@ -96,5 +102,24 @@ public class CompetitorDTO {
     public void setCountry(String country) {
         this.country = country;
     }
+
+    public Set<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(Set<Producto> productos) {
+        this.productos = productos;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+    
+    
     
 }

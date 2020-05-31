@@ -9,11 +9,15 @@ package com.example.models;
 import com.sun.istack.NotNull;
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Set;
+import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
@@ -61,13 +65,18 @@ public class Competitor implements Serializable{
     private String country;
     
     private boolean winner;
+    
+    @OneToMany(cascade = ALL, mappedBy = "competitor")
+    private Set<Producto> products;
+    
+    private String password;
 
     
     public Competitor(){
         
     }
     
-    public Competitor(String nameN, String surnameN, int ageN,String telephoneN, String cellphoneN, String addressN, String  cityN, String countryN,boolean winnerN){
+    public Competitor(String nameN, String surnameN, int ageN,String telephoneN, String cellphoneN, String addressN, String  cityN, String countryN,boolean winnerN, String passwordN){
         name=nameN;
         surname=surnameN;
         age=ageN;
@@ -77,8 +86,12 @@ public class Competitor implements Serializable{
         city=cityN;
         country=countryN;
         winner=winnerN;
+        products = new HashSet<Producto>();
+        password = passwordN;
     }
 
+    
+    
     public long getId() {
         return id;
     }
@@ -157,6 +170,22 @@ public class Competitor implements Serializable{
 
     public void setWinner(boolean winner) {
         this.winner = winner;
+    }
+
+    public Set<Producto> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Producto> products) {
+       this.products = products;
+   }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
     
     @PreUpdate

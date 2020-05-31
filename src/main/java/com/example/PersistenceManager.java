@@ -15,7 +15,7 @@ import javax.persistence.Persistence;
 public class PersistenceManager {
     
     public static boolean DEBUG = true;
-    public static final PersistenceManager singleton = new PersistenceManager();
+    private static final PersistenceManager singleton = new PersistenceManager();
     protected EntityManagerFactory emf;
     
     public static PersistenceManager getInstance(){
